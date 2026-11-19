@@ -21,12 +21,28 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/6.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-f&i7l1!fx-6cz7hfjo&_)b&+bd9^(pdyr9d9&ti98nw+l5rbg2'
+SECRET_KEY = os.environ.get(
+    'SECRET_KEY',
+    'django-insecure-f&i7l1!fx-6cz7hfjo&_)b&+bd9^(pdyr9d9&ti98nw+l5rbg2',
+)
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = os.environ.get('DEBUG', 'false').lower() in ('true', '1', 'yes')
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [
+    host.strip()
+    for host in os.environ.get(
+        'ALLOWED_HOSTS',
+        'localhost,127.0.0.1,.vercel.app',
+    ).split(',')
+    if host.strip()
+]
+
+CSRF_TRUSTED_ORIGINS = [
+    origin.strip()
+    for origin in os.environ.get('CSRF_TRUSTED_ORIGINS', '').split(',')
+    if origin.strip()
+]
 
 
 # Application definition
@@ -135,9 +151,10 @@ DEFAULT_FROM_EMAIL = os.environ.get('DEFAULT_FROM_EMAIL', SMTP_USERNAME)
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media'
 
-# Ensure static and media directories exist so Django doesn't raise W004 or upload errors
-(BASE_DIR / 'static').mkdir(parents=True, exist_ok=True)
-MEDIA_ROOT.mkdir(parents=True, exist_ok=True)
+# Keep filesystem writes out of read-only serverless deployments.
+if not os.environ.get('VERCEL'):
+    (BASE_DIR / 'static').mkdir(parents=True, exist_ok=True)
+    MEDIA_ROOT.mkdir(parents=True, exist_ok=True)
 
 # Email
 # Set EMAIL_HOST_PASSWORD to a Google App Password before sending live email.

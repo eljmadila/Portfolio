@@ -144,6 +144,15 @@ STATICFILES_DIRS = [
     BASE_DIR / 'static',
 ]
 
+STORAGES = {
+    'default': {
+        'BACKEND': 'django.core.files.storage.FileSystemStorage',
+    },
+    'staticfiles': {
+        'BACKEND': 'whitenoise.storage.CompressedStaticFilesStorage',
+    },
+}
+
 SMTP_USERNAME = os.environ.get('EMAIL_HOST_USER', 'madilaelyamine@gmail.com')
 DEFAULT_FROM_EMAIL = os.environ.get('DEFAULT_FROM_EMAIL', SMTP_USERNAME)
 

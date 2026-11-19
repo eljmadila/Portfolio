@@ -1,0 +1,80 @@
+{% extends 'main.html' %}
+{% load static %}
+
+{% block title %}Services & Pricing | Elyamine Madila{% endblock %}
+
+{% block extra_head %}
+<link rel="stylesheet" href="{% static 'css/home.css' %}?v=9">
+{% endblock %}
+
+{% block content %}
+{% url 'contact' as contact_url %}
+<!-- ==========================================================================
+     PAGE HERO: SERVICES
+     ========================================================================== -->
+<section class="page-hero">
+    <div class="container page-hero-inner">
+        <span class="section-eyebrow">
+            <i class="fa-solid fa-briefcase" aria-hidden="true"></i> Capabilities &amp; Solutions
+        </span>
+        <h1 class="page-hero-title">
+            Full-Stack &amp; AI <span class="text-gradient">Engineering Services</span>
+        </h1>
+        <p class="page-hero-subtitle">
+            From high-velocity SaaS MVPs to enterprise LLM integrations and scalable backend architectures—engineered for reliability, speed, and measurable ROI.
+        </p>
+
+        <div class="hero-actions" style="justify-content: center; margin-bottom: 0;">
+            {% include 'components/cta_buttons/cta_button.html' with href=contact_url variant="primary" size="lg" label="Book a Discovery Call" icon="fa-solid fa-arrow-right" %}
+            {% include 'components/cta_buttons/cta_button.html' with href="#pricing" variant="outline" size="lg" label="View Packages & Pricing" %}
+        </div>
+    </div>
+</section>
+
+<!-- ==========================================================================
+     CORE SERVICES GRID
+     ========================================================================== -->
+<section class="section services-section">
+    <div class="container">
+        <div class="section-header">
+            <span class="section-eyebrow">
+                <i class="fa-solid fa-cubes" aria-hidden="true"></i> Core Offerings
+            </span>
+            <h2 class="section-title">How I Can Help Your Team Succeed</h2>
+        </div>
+
+        <div class="services-grid">
+            {% for service in services %}
+            {% include 'components/service_cards/service_card.html' with inquiry_url=contact_url %}
+            {% empty %}
+            <p class="empty-state">No services added in the database yet.</p>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+<!-- ==========================================================================
+     PRICING SECTION (#pricing)
+     ========================================================================== -->
+<section class="section pricing-section" id="pricing">
+    <div class="container">
+        <div class="section-header">
+            <span class="section-eyebrow">
+                <i class="fa-solid fa-tag" aria-hidden="true"></i> Transparent Investment
+            </span>
+            <h2 class="section-title">Packages &amp; Engagement Models</h2>
+            <p class="section-subtitle">
+                Predictable pricing, milestone-based delivery, and 100% source-code ownership.
+            </p>
+        </div>
+
+        <div class="pricing-grid">
+            {% for plan in pricing_plans %}
+            {% include 'components/pricing_cards/pricing_plan_card.html' with inquiry_url=contact_url %}
+            {% empty %}
+            {% include 'components/pricing_cards/default_pricing_cards.html' with inquiry_url=contact_url %}
+            {% endfor %}
+        </div>
+    </div>
+</section>
+{% endblock %}

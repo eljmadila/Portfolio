@@ -1,0 +1,85 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en" id="top">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/svg+xml" href="{% static 'images/favicon.svg' %}">
+    <title>{% block title %}Elyamine Madila | Full-Stack & AI Engineer{% endblock %}</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@600;700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer">
+    <link rel="stylesheet" href="{% static 'css/main.css' %}?v=4">
+
+    {% block extra_head %}{% endblock %}
+</head>
+
+<body>
+    {% include 'components/navigation/navbar.html' %}
+
+    <main>
+        {% block content %}{% endblock %}
+    </main>
+
+    {% include 'components/footer/site_footer.html' %}
+
+    <script>
+        (function () {
+            const toggleBtn = document.getElementById('nav-toggle');
+            const navMenu = document.getElementById('nav-menu');
+            const header = document.getElementById('site-header');
+
+            if (toggleBtn && navMenu) {
+                toggleBtn.addEventListener('click', function () {
+                    const isOpen = navMenu.classList.toggle('is-open');
+                    toggleBtn.classList.toggle('is-active', isOpen);
+                    toggleBtn.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+                });
+
+                document.addEventListener('click', function (event) {
+                    if (!header.contains(event.target) && navMenu.classList.contains('is-open')) {
+                        navMenu.classList.remove('is-open');
+                        toggleBtn.classList.remove('is-active');
+                        toggleBtn.setAttribute('aria-expanded', 'false');
+                    }
+                });
+            }
+
+            window.addEventListener('scroll', function () {
+                if (window.scrollY > 16) {
+                    header.classList.add('is-scrolled');
+                } else {
+                    header.classList.remove('is-scrolled');
+                }
+            }, { passive: true });
+
+            if (window.matchMedia('(prefers-reduced-motion: reduce)').matches || !('IntersectionObserver' in window)) {
+                return;
+            }
+
+            const revealElements = document.querySelectorAll(
+                '.hero-content, .hero-visual, .section-header, .about-story-card, ' +
+                '.pillar-card, .skills-bars-card, .tech-category-card, .service-card, ' +
+                '.project-card, .pricing-card, .faq-item, .contact-info-panel, ' +
+                '.contact-form-card, .page-hero-inner, .timeline-card, .blog-card, .footer-cta'
+            );
+            const revealObserver = new IntersectionObserver(function (entries, observer) {
+                entries.forEach(function (entry) {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('is-visible');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.12, rootMargin: '0px 0px -24px 0px' });
+
+            revealElements.forEach(function (element) {
+                element.classList.add('scroll-reveal');
+                revealObserver.observe(element);
+            });
+        })();
+    </script>
+</body>
+</html>

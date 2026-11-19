@@ -1,0 +1,123 @@
+{% load static %}
+{% url 'contact' as contact_url %}
+{% static 'files/cv.pdf' as cv_url %}
+<footer class="site-footer">
+    <div class="container">
+        <div class="footer-cta">
+            <div class="footer-cta-content">
+                <span class="footer-cta-badge">
+                    <span class="status-dot"></span> Open for Collaboration
+                </span>
+                <h2>Have an ambitious idea or project in mind?</h2>
+                <p>Let's engineer scalable web platforms and intelligent AI solutions tailored to your goals.</p>
+            </div>
+            <div class="footer-cta-actions">
+                {% include 'components/cta_buttons/cta_button.html' with href=contact_url variant="primary" size="lg" label="Start a Conversation" icon="fa-solid fa-arrow-right" %}
+                {% include 'components/cta_buttons/cta_button.html' with href=cv_url variant="outline" size="lg" label="Download CV" icon="fa-solid fa-file-arrow-down" icon_position="left" download=True %}
+            </div>
+        </div>
+
+        <div class="footer-grid">
+            <div class="footer-brand">
+                <a href="{% url 'home' %}" class="brand footer-brand-link">
+                    <span class="brand-mark" aria-hidden="true">EM</span>
+                    <span class="brand-text">
+                        <span class="brand-name">Elyamine Madila<span class="brand-dot">.</span></span>
+                        <span class="brand-role">Software &amp; AI Engineer</span>
+                    </span>
+                </a>
+                <p class="footer-bio">
+                    Full-Stack &amp; AI Software Engineer crafting production-ready web applications, scalable backend architectures, and intelligent AI-driven systems.
+                </p>
+                <div class="availability-pill">
+                    <span class="status-dot" aria-hidden="true"></span>
+                    <span>Available for remote roles &amp; freelance projects</span>
+                </div>
+                <div class="social-links" aria-label="Social media links">
+                    <a href="https://github.com/eljmadila" target="_blank" rel="noopener noreferrer" aria-label="GitHub" title="GitHub">
+                        <i class="fa-brands fa-github" aria-hidden="true"></i>
+                    </a>
+                    <a href="https://www.linkedin.com/in/elyamine-madila-9a541b29a/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" title="LinkedIn">
+                        <i class="fa-brands fa-linkedin-in" aria-hidden="true"></i>
+                    </a>
+                    <a href="https://twitter.com/" target="_blank" rel="noopener noreferrer" aria-label="X (Twitter)" title="X (Twitter)">
+                        <i class="fa-brands fa-x-twitter" aria-hidden="true"></i>
+                    </a>
+                    <a href="https://instagram.com/mrsaint_243" target="_blank" rel="noopener noreferrer" aria-label="Instagram" title="Instagram">
+                        <i class="fa-brands fa-instagram" aria-hidden="true"></i>
+                    </a>
+                    <a href="https://wa.me/254759816437" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp" title="WhatsApp">
+                        <i class="fa-brands fa-whatsapp" aria-hidden="true"></i>
+                    </a>
+                </div>
+            </div>
+
+            <div class="footer-col">
+                <h3 class="footer-heading">Navigation</h3>
+                <ul class="footer-links">
+                    <li><a href="{% url 'home' %}">Home</a></li>
+                    <li><a href="{% url 'projects' %}">Featured Projects</a></li>
+                    <li><a href="{% url 'services' %}">Services &amp; Solutions</a></li>
+                    <li><a href="{% url 'about' %}">About &amp; Blog</a></li>
+                    <li><a href="{% url 'contact' %}">Contact Me</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-col">
+                <h3 class="footer-heading">Capabilities</h3>
+                <ul class="footer-links">
+                    <li><a href="{% url 'services' %}">Full-Stack Web Development</a></li>
+                    <li><a href="{% url 'services' %}">AI &amp; LLM Integrations</a></li>
+                    <li><a href="{% url 'services' %}">Scalable Backend &amp; APIs</a></li>
+                    <li><a href="{% url 'services' %}">Database Architecture</a></li>
+                    <li><a href="{% url 'services' %}#pricing">Pricing &amp; Packages</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-col">
+                <h3 class="footer-heading">Direct Contact</h3>
+                <ul class="footer-contact">
+                    <li>
+                        <span class="contact-icon" aria-hidden="true">
+                            <i class="fa-solid fa-envelope"></i>
+                        </span>
+                        <div class="contact-detail">
+                            <span class="contact-label">Email</span>
+                            <a href="mailto:madilaelyamine@gmail.com">madilaelyamine@gmail.com</a>
+                        </div>
+                    </li>
+                    <li>
+                        <span class="contact-icon" aria-hidden="true">
+                            <i class="fa-solid fa-phone"></i>
+                        </span>
+                        <div class="contact-detail">
+                            <span class="contact-label">Phone / WhatsApp</span>
+                            <a href="tel:+254759816437">+254 759 816 437</a>
+                        </div>
+                    </li>
+                    <li>
+                        <span class="contact-icon" aria-hidden="true">
+                            <i class="fa-solid fa-globe"></i>
+                        </span>
+                        <div class="contact-detail">
+                            <span class="contact-label">Location</span>
+                            <span>100% Remote &bull; Worldwide</span>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <p class="copyright">
+                &copy; 2026 <strong>Elyamine Madila</strong>. All rights reserved.
+            </p>
+            <div class="footer-bottom-right">
+                <span class="built-with">Engineered with Django &amp; Modern Web Standards</span>
+                <a href="#top" class="back-to-top" aria-label="Back to top" title="Back to top">
+                    <i class="fa-solid fa-arrow-up" aria-hidden="true"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+</footer>

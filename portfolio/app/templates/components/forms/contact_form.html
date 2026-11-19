@@ -1,0 +1,73 @@
+<div class="contact-form-card">
+    <h3 style="margin-bottom: 6px;">{{ form_title }}</h3>
+    <p style="font-size: 0.9rem; margin-bottom: 24px;">Fields marked with <span class="req">*</span> are required.</p>
+
+    {% if messages %}
+    <div class="form-alerts">
+        {% for message in messages %}
+        <div class="form-alert form-alert-success" role="alert">
+            <i class="fa-solid fa-circle-check" aria-hidden="true"></i>
+            <span>{{ message }}</span>
+        </div>
+        {% endfor %}
+    </div>
+    {% endif %}
+
+    <form method="post" action="{{ form_action }}{% if form_anchor %}#{{ form_anchor }}{% endif %}" class="contact-form">
+        {% csrf_token %}
+        <div class="form-row">
+            <div class="form-group">
+                <label for="id_name">Full Name <span class="req">*</span></label>
+                <input type="text" id="id_name" name="name" placeholder="e.g. Alex Morgan" required>
+            </div>
+            <div class="form-group">
+                <label for="id_email">Email Address <span class="req">*</span></label>
+                <input type="email" id="id_email" name="email" placeholder="alex@company.com" required>
+            </div>
+        </div>
+
+        <div class="form-row">
+            <div class="form-group">
+                <label for="id_company">Company / Organization</label>
+                <input type="text" id="id_company" name="company" placeholder="Optional">
+            </div>
+            <div class="form-group">
+                <label for="id_service">Inquiry Type</label>
+                <select id="id_service" name="service">
+                    <option value="">General inquiry</option>
+                    {% for service_option in services %}
+                    <option value="{{ service_option.pk }}">{{ service_option.title }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+        </div>
+
+        <div class="form-row">
+            <div class="form-group">
+                <label for="id_budget">Estimated Budget</label>
+                <select id="id_budget" name="budget">
+                    <option value="150-500">$150 – $500 (Showcase Website)</option>
+                    <option value="700-1000">$700 – $1,000 (Web App / E-Commerce)</option>
+                    <option value="1000+">$1,000+ (Full-Stack AI Solution)</option>
+                    <option value="retainer">Monthly Retainer / Role</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="id_timeline">Target Timeline</label>
+                <select id="id_timeline" name="timeline">
+                    <option value="immediate">Immediate (Within 1 week)</option>
+                    <option value="1-month">Within 2–4 weeks</option>
+                    <option value="1+ month">Within 2–4 months</option>
+                    <option value="flexible">Flexible / Planning Phase</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="id_message">Project Details or Message <span class="req">*</span></label>
+            <textarea id="id_message" name="message" rows="6" placeholder="Describe your project goals, key features, or the role you're hiring for..." required></textarea>
+        </div>
+
+        {% include 'components/cta_buttons/cta_button.html' with button_type="submit" variant="primary" size="lg" label=submit_label icon="fa-solid fa-paper-plane" extra_classes="form-submit-btn" %}
+    </form>
+</div>

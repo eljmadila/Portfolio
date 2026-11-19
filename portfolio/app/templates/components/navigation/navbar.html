@@ -1,0 +1,65 @@
+{% load static %}
+{% url 'contact' as contact_url %}
+{% static 'files/cv.pdf' as cv_url %}
+<header class="site-header" id="site-header">
+    <nav class="navbar container" aria-label="Main navigation">
+        <a href="{% url 'home' %}" class="brand" aria-label="Elyamine Madila Home">
+            <span class="brand-mark" aria-hidden="true">EM</span>
+            <span class="brand-text">
+                <span class="brand-name">Elyamine Madila<span class="brand-dot">.</span></span>
+                <span class="brand-role">Software &amp; AI Engineer</span>
+            </span>
+        </a>
+
+        {% with current=request.resolver_match.url_name %}
+        <div class="nav-menu" id="nav-menu">
+            <ul class="navlinks">
+                <li>
+                    <a href="{% url 'home' %}" {% if current == 'home' %}class="active" aria-current="page"{% endif %}>
+                        Home
+                    </a>
+                </li>
+                <li>
+                    <a href="{% url 'projects' %}" {% if current == 'projects' %}class="active" aria-current="page"{% endif %}>
+                        Projects
+                    </a>
+                </li>
+                <li>
+                    <a href="{% url 'services' %}" {% if current == 'services' %}class="active" aria-current="page"{% endif %}>
+                        Services
+                    </a>
+                </li>
+                <li>
+                    <a href="{% url 'about' %}" {% if current == 'about' %}class="active" aria-current="page"{% endif %}>
+                        About &amp; Blog
+                    </a>
+                </li>
+                <li>
+                    <a href="{% url 'contact' %}" {% if current == 'contact' %}class="active" aria-current="page"{% endif %}>
+                        Contact
+                    </a>
+                </li>
+            </ul>
+
+            <div class="nav-actions-mobile">
+                {% include 'components/cta_buttons/cta_button.html' with href=contact_url variant="outline" label="Let's Talk" %}
+                {% include 'components/cta_buttons/cta_button.html' with href=cv_url variant="primary" label="Download CV" icon="fa-solid fa-arrow-down-long" download=True %}
+            </div>
+        </div>
+        {% endwith %}
+
+        <div class="nav-actions">
+            <a href="https://github.com/eljmadila" target="_blank" rel="noopener noreferrer" class="nav-icon-btn" aria-label="GitHub Profile" title="GitHub">
+                <i class="fa-brands fa-github" aria-hidden="true"></i>
+            </a>
+            {% include 'components/cta_buttons/cta_button.html' with href=contact_url variant="ghost" label="Let's Talk" %}
+            {% include 'components/cta_buttons/cta_button.html' with href=cv_url variant="primary" label="Resume" icon="fa-solid fa-download" download=True %}
+        </div>
+
+        <button type="button" class="nav-toggle" id="nav-toggle" aria-expanded="false" aria-controls="nav-menu" aria-label="Toggle navigation menu">
+            <span class="hamburger-line"></span>
+            <span class="hamburger-line"></span>
+            <span class="hamburger-line"></span>
+        </button>
+    </nav>
+</header>

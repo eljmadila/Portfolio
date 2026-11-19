@@ -1,0 +1,15 @@
+{% with button_variant=variant|default:"primary" %}
+{% if button_type %}
+<button type="{{ button_type }}" class="btn btn-{{ button_variant }}{% if size %} btn-{{ size }}{% endif %}{% if extra_classes %} {{ extra_classes }}{% endif %}">
+{% else %}
+<a href="{{ href }}" class="btn btn-{{ button_variant }}{% if size %} btn-{{ size }}{% endif %}{% if extra_classes %} {{ extra_classes }}{% endif %}"{% if download %} download{% endif %}{% if target %} target="{{ target }}" rel="noopener noreferrer"{% endif %}>
+{% endif %}
+    {% if icon and icon_position == "left" %}<i class="{{ icon }}" aria-hidden="true"></i>{% endif %}
+    <span>{{ label }}</span>
+    {% if icon and icon_position != "left" %}<i class="{{ icon }}" aria-hidden="true"></i>{% endif %}
+{% if button_type %}
+</button>
+{% else %}
+</a>
+{% endif %}
+{% endwith %}

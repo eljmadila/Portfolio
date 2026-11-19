@@ -1,0 +1,43 @@
+<article class="project-card" data-category="{{ project.category|lower }}">
+    <div class="project-media">
+        {% if project.image_1 %}
+        <img src="{{ project.image_1.url }}" alt="{{ project.name }}" loading="lazy">
+        {% else %}
+        <div class="project-placeholder">
+            <i class="fa-solid fa-terminal" aria-hidden="true"></i>
+        </div>
+        {% endif %}
+        <span class="project-category-badge">{{ project.get_category_display }}</span>
+    </div>
+    <div class="project-body">
+        <h3>{{ project.name }}</h3>
+        {% if truncate_description %}
+        <p>{{ project.description|truncatewords:26 }}</p>
+        {% else %}
+        <p>{{ project.description }}</p>
+        {% endif %}
+        <div class="project-stack">
+            {% for stack in project.stack_used.all %}
+            <span class="stack-pill">{{ stack.name }}</span>
+            {% endfor %}
+        </div>
+        <div class="project-links">
+            {% if project.live_url %}
+            <a href="{{ project.live_url }}" target="_blank" rel="noopener noreferrer" class="project-link-btn">
+                <span>Live Demo</span>
+                <i class="fa-solid fa-arrow-up-right-from-square" aria-hidden="true"></i>
+            </a>
+            {% else %}
+            <a href="{{ inquiry_url }}" class="project-link-btn">
+                <span>{{ inquiry_label }}</span>
+                <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+            </a>
+            {% endif %}
+            {% if project.github_url %}
+            <a href="{{ project.github_url }}" target="_blank" rel="noopener noreferrer" class="project-repo-link">
+                <i class="fa-brands fa-github" aria-hidden="true"></i> {{ repo_label }}
+            </a>
+            {% endif %}
+        </div>
+    </div>
+</article>

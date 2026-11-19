@@ -1,0 +1,14 @@
+<article class="service-card {% if service.is_featured %}service-card-featured{% endif %}">
+    <div class="service-top">
+        <div class="service-icon">
+            <i class="{{ service.icon|default:'fa-solid fa-cube' }}" aria-hidden="true"></i>
+        </div>
+        <span class="service-number">0{{ forloop.counter }}</span>
+    </div>
+    <h3>{{ service.title }}</h3>
+    <p>{{ service.description }}</p>
+    <a href="{{ inquiry_url }}" class="service-link">
+        <span>Inquire About This</span>
+        <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+    </a>
+</article>

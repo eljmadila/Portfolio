@@ -1,0 +1,87 @@
+{% extends 'main.html' %}
+{% load static %}
+
+{% block title %}Projects & Case Studies | Elyamine Madila{% endblock %}
+
+{% block extra_head %}
+<link rel="stylesheet" href="{% static 'css/home.css' %}?v=10">
+{% endblock %}
+
+{% block content %}
+{% url 'contact' as contact_url %}
+<!-- ==========================================================================
+     PAGE HERO: PROJECTS
+     ========================================================================== -->
+<section class="page-hero">
+    <div class="container page-hero-inner">
+        <span class="section-eyebrow">
+            <i class="fa-solid fa-folder-open" aria-hidden="true"></i> Portfolio Archive
+        </span>
+        <h1 class="page-hero-title">
+            Engineered <span class="text-gradient">Products &amp; Case Studies</span>
+        </h1>
+        <p class="page-hero-subtitle">
+            Explore production web platforms, custom AI &amp; RAG systems, and high-throughput APIs designed and built from the ground up.
+        </p>
+    </div>
+</section>
+
+<!-- ==========================================================================
+     FILTERABLE PROJECT ARCHIVE
+     ========================================================================== -->
+<section class="section projects-section" id="archive">
+    <div class="container">
+        <div class="projects-toolbar">
+            {% include 'components/project_filters/project_filters.html' %}
+
+            <form method="get" class="project-search-box">
+                <i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i>
+                {% if selected_category != 'all' %}
+                <input type="hidden" name="category" value="{{ selected_category }}">
+                {% endif %}
+                <input type="search" id="project-search" name="search" value="{{ search_query }}" placeholder="Search projects by title or stack..." aria-label="Search projects">
+            </form>
+        </div>
+
+        <div class="projects-grid" id="projects-grid">
+            {% for project in projects %}
+            {% include 'components/project_cards/project_card.html' with inquiry_url=contact_url inquiry_label="Request Demo" repo_label="Code" %}
+            {% empty %}
+            <p class="empty-state">No projects added in the database yet.</p>
+            {% endfor %}
+        </div>
+
+        {% if page_obj.has_other_pages %}
+        <nav class="project-pagination" aria-label="Projects pagination">
+            {% if page_obj.has_previous %}
+            <a class="pagination-link" href="?page={{ page_obj.previous_page_number }}{% if selected_category != 'all' %}&amp;category={{ selected_category }}{% endif %}{% if search_query %}&amp;search={{ search_query|urlencode }}{% endif %}" aria-label="Previous page">
+                <i class="fa-solid fa-chevron-left" aria-hidden="true"></i>
+            </a>
+            {% else %}
+            <span class="pagination-link disabled" aria-hidden="true">
+                <i class="fa-solid fa-chevron-left" aria-hidden="true"></i>
+            </span>
+            {% endif %}
+
+            {% for page_number in paginator.page_range %}
+            {% if page_number == page_obj.number %}
+            <span class="pagination-link active" aria-current="page">{{ page_number }}</span>
+            {% else %}
+            <a class="pagination-link" href="?page={{ page_number }}{% if selected_category != 'all' %}&amp;category={{ selected_category }}{% endif %}{% if search_query %}&amp;search={{ search_query|urlencode }}{% endif %}">{{ page_number }}</a>
+            {% endif %}
+            {% endfor %}
+
+            {% if page_obj.has_next %}
+            <a class="pagination-link" href="?page={{ page_obj.next_page_number }}{% if selected_category != 'all' %}&amp;category={{ selected_category }}{% endif %}{% if search_query %}&amp;search={{ search_query|urlencode }}{% endif %}" aria-label="Next page">
+                <i class="fa-solid fa-chevron-right" aria-hidden="true"></i>
+            </a>
+            {% else %}
+            <span class="pagination-link disabled" aria-hidden="true">
+                <i class="fa-solid fa-chevron-right" aria-hidden="true"></i>
+            </span>
+            {% endif %}
+        </nav>
+        {% endif %}
+    </div>
+</section>
+{% endblock %}

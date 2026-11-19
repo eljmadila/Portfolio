@@ -1,0 +1,28 @@
+<div class="pricing-card {% if plan.is_popular %}pricing-card-popular{% endif %}">
+    {% if plan.is_popular %}
+    <div class="popular-ribbon">Most Popular</div>
+    {% endif %}
+    <div class="pricing-header">
+        <span class="pricing-tier">{{ plan.tier_name }}</span>
+        <div class="pricing-price">
+            <span class="price-amount">{{ plan.price }}</span>
+            <span class="price-period">{{ plan.period }}</span>
+        </div>
+        <p class="pricing-desc">{{ plan.description }}</p>
+    </div>
+
+    <ul class="pricing-features">
+        {% for feature in plan.feature_list %}
+        <li><i class="fa-solid fa-check" aria-hidden="true"></i> {{ feature }}</li>
+        {% endfor %}
+        {% if plan.delivery_time %}
+        <li><i class="fa-solid fa-clock" aria-hidden="true"></i> {{ plan.delivery_time }}</li>
+        {% endif %}
+    </ul>
+
+    {% if plan.is_popular %}
+    {% include 'components/cta_buttons/cta_button.html' with href=inquiry_url variant="primary" label="Get Started" extra_classes="pricing-btn" %}
+    {% else %}
+    {% include 'components/cta_buttons/cta_button.html' with href=inquiry_url variant="outline" label="Get Started" extra_classes="pricing-btn" %}
+    {% endif %}
+</div>

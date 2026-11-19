@@ -1,0 +1,7 @@
+<div class="project-filters" role="tablist" aria-label="Filter projects by category">
+    <a href="?{% if search_query %}search={{ search_query|urlencode }}{% endif %}" class="filter-btn {% if selected_category == 'all' %}active{% endif %}" role="tab" aria-selected="{% if selected_category == 'all' %}true{% else %}false{% endif %}">All Projects</a>
+    <a href="?category=ai{% if search_query %}&amp;search={{ search_query|urlencode }}{% endif %}" class="filter-btn {% if selected_category == 'ai' %}active{% endif %}" role="tab" aria-selected="{% if selected_category == 'ai' %}true{% else %}false{% endif %}">AI &amp; ML</a>
+    <a href="?category=fullstack{% if search_query %}&amp;search={{ search_query|urlencode }}{% endif %}" class="filter-btn {% if selected_category == 'fullstack' %}active{% endif %}" role="tab" aria-selected="{% if selected_category == 'fullstack' %}true{% else %}false{% endif %}">Full-Stack Web</a>
+    <a href="?category=backend{% if search_query %}&amp;search={{ search_query|urlencode }}{% endif %}" class="filter-btn {% if selected_category == 'backend' %}active{% endif %}" role="tab" aria-selected="{% if selected_category == 'backend' %}true{% else %}false{% endif %}">APIs &amp; FinTech</a>
+    <a href="?category=cloud{% if search_query %}&amp;search={{ search_query|urlencode }}{% endif %}" class="filter-btn {% if selected_category == 'cloud' %}active{% endif %}" role="tab" aria-selected="{% if selected_category == 'cloud' %}true{% else %}false{% endif %}">Cloud &amp; DevOps</a>
+</div>

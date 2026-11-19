@@ -1,0 +1,94 @@
+{% extends 'main.html' %}
+{% load static %}
+
+{% block title %}Contact Elyamine Madila | Full-Stack & AI Engineer{% endblock %}
+
+{% block extra_head %}
+<link rel="stylesheet" href="{% static 'css/home.css' %}?v=9">
+{% endblock %}
+
+{% block content %}
+{% url 'contact' as contact_form_action %}
+<!-- ==========================================================================
+     PAGE HERO: CONTACT
+     ========================================================================== -->
+<section class="page-hero">
+    <div class="container page-hero-inner">
+        <span class="section-eyebrow">
+            <i class="fa-solid fa-paper-plane" aria-hidden="true"></i> Let's Connect
+        </span>
+        <h1 class="page-hero-title">
+            Start a <span class="text-gradient">Conversation</span>
+        </h1>
+        <p class="page-hero-subtitle">
+            Available for custom full-stack &amp; AI development projects, technical consulting, and remote engineering roles. I respond to all messages within 24 hours.
+        </p>
+    </div>
+</section>
+
+<!-- ==========================================================================
+     MAIN CONTACT SECTION
+     ========================================================================== -->
+<section class="section contact-section" style="padding-top: 32px;">
+    <div class="container">
+        <div class="contact-grid">
+            <!-- Left Column: Direct Channels & Process -->
+            <div class="contact-info-panel">
+                <h3>Direct Contact Channels</h3>
+                <p>Reach out directly via email or WhatsApp, or fill out the project brief form.</p>
+
+                <div class="contact-cards">
+                    <a href="mailto:madilaelyamine@gmail.com" class="contact-info-card">
+                        <span class="c-card-icon"><i class="fa-solid fa-envelope" aria-hidden="true"></i></span>
+                        <div>
+                            <span class="c-card-label">Email Address</span>
+                            <strong class="c-card-value">madilaelyamine@gmail.com</strong>
+                        </div>
+                    </a>
+
+                    <a href="https://wa.me/254759816437" target="_blank" rel="noopener noreferrer" class="contact-info-card">
+                        <span class="c-card-icon"><i class="fa-brands fa-whatsapp" aria-hidden="true"></i></span>
+                        <div>
+                            <span class="c-card-label">WhatsApp / Direct Phone</span>
+                            <strong class="c-card-value">+254 759 816 437</strong>
+                        </div>
+                    </a>
+
+                    <div class="contact-info-card">
+                        <span class="c-card-icon"><i class="fa-solid fa-location-dot" aria-hidden="true"></i></span>
+                        <div>
+                            <span class="c-card-label">Location &amp; Timezone</span>
+                            <strong class="c-card-value">100% Remote &bull; Available Worldwide</strong>
+                        </div>
+                    </div>
+
+                    <a href="https://github.com/eljmadila" target="_blank" rel="noopener noreferrer" class="contact-info-card">
+                        <span class="c-card-icon"><i class="fa-brands fa-github" aria-hidden="true"></i></span>
+                        <div>
+                            <span class="c-card-label">GitHub Portfolio</span>
+                            <strong class="c-card-value">github.com/eljmadila</strong>
+                        </div>
+                    </a>
+                </div>
+
+                <div class="contact-next-steps">
+                    <h4>What Happens Next?</h4>
+                    <ol class="next-steps-list">
+                        <li><span>1</span> I review your message and technical goals within 24 hours.</li>
+                        <li><span>2</span> We schedule a free 30-minute discovery call to align on scope.</li>
+                        <li><span>3</span> You receive a clear architectural roadmap, timeline, and quote.</li>
+                    </ol>
+                </div>
+
+                <div class="contact-guarantee">
+                    <i class="fa-solid fa-lock" aria-hidden="true"></i>
+                    <span><strong>100% Confidential:</strong> Happy to sign an NDA before discussing sensitive IP.</span>
+                </div>
+            </div>
+
+            <!-- Right Column: Contact Form -->
+            {% include 'components/forms/contact_form.html' with form_action=contact_form_action form_title="Send a Project Brief or Inquiry" submit_label="Send Inquiry" %}
+        </div>
+    </div>
+</section>
+{% endblock %}

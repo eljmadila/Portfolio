@@ -1,0 +1,98 @@
+{% extends 'main.html' %}
+{% load static %}
+
+{% block title %}About & Engineering Blog | Elyamine Madila{% endblock %}
+
+{% block extra_head %}
+<link rel="stylesheet" href="{% static 'css/home.css' %}?v=9">
+{% endblock %}
+
+{% block content %}
+{% static 'files/cv.pdf' as cv_url %}
+<!-- ==========================================================================
+     PAGE HERO: ABOUT & BLOG
+     ========================================================================== -->
+<section class="page-hero">
+    <div class="container page-hero-inner">
+        <span class="section-eyebrow">
+            <i class="fa-solid fa-user-astronaut" aria-hidden="true"></i> Engineer Profile &amp; Insights
+        </span>
+        <h1 class="page-hero-title">
+            About <span class="text-gradient">Elyamine Madila</span>
+        </h1>
+        <p class="page-hero-subtitle">
+            Full-Stack &amp; AI Software Engineer passionate about clean architecture, scalable backend systems, and embedding practical artificial intelligence into modern web products.
+        </p>
+
+        <div class="hero-actions" style="justify-content: center; margin-bottom: 0;">
+            {% include 'components/cta_buttons/cta_button.html' with href=cv_url variant="primary" size="lg" label="Download Full CV" icon="fa-solid fa-download" icon_position="left" download=True %}
+            {% include 'components/cta_buttons/cta_button.html' with href="#blog" variant="outline" size="lg" label="Read Engineering Blog" icon="fa-solid fa-book-open" icon_position="left" %}
+        </div>
+    </div>
+</section>
+
+<!-- ==========================================================================
+     EXPERIENCE, EDUCATION & CERTIFICATIONS TIMELINE
+     ========================================================================== -->
+<section class="section timeline-section">
+    <div class="container">
+        <div class="section-header">
+            <span class="section-eyebrow">
+                <i class="fa-solid fa-graduation-cap" aria-hidden="true"></i> Credentials &amp; Track Record
+            </span>
+            <h2 class="section-title">Formations &amp; Certifications</h2>
+        </div>
+
+        <div class="timeline-grid">
+            {% for item in formations %}
+            <div class="timeline-card">
+                <span class="timeline-date">{{ item.date_earned|date:"M Y" }}</span>
+                <h3>{{ item.name }}</h3>
+                {% if item.organization %}
+                <span class="timeline-org">{{ item.organization }}</span>
+                {% endif %}
+                <p>{{ item.description }}</p>
+            </div>
+            {% empty %}
+            <p class="empty-state">No formations or certifications added in the database yet.</p>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+<!-- ==========================================================================
+     ENGINEERING BLOG & TECHNICAL INSIGHTS (#blog)
+     ========================================================================== -->
+<section class="section blog-section" id="blog">
+    <div class="container">
+        <div class="section-header">
+            <span class="section-eyebrow">
+                <i class="fa-solid fa-pen-nib" aria-hidden="true"></i> Engineering Blog
+            </span>
+            <h2 class="section-title">Technical Articles &amp; Insights</h2>
+        </div>
+
+        <div class="blog-grid">
+            {% for post in blog_posts %}
+            <article class="blog-card">
+                <div class="blog-meta">
+                    <span class="blog-tag">{{ post.tag }}</span>
+                    <span class="blog-readtime"><i class="fa-regular fa-clock" aria-hidden="true"></i> {{ post.read_time }} min read</span>
+                </div>
+                <h3>{{ post.title }}</h3>
+                <p>{{ post.summary }}</p>
+                <div class="blog-footer">
+                    <span class="blog-date">{{ post.published_at|date:"M d, Y" }}</span>
+                    <a href="{% url 'contact' %}" class="service-link">
+                        <span>Discuss Article</span>
+                        <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+                    </a>
+                </div>
+            </article>
+            {% empty %}
+            <p class="empty-state">No blog posts published in the database yet.</p>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+{% endblock %}
